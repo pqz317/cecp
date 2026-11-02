@@ -1,0 +1,32 @@
+general:
+  seed: 0
+  run_name: default
+  per_agent_env_steps: 3000000000
+  num_agents: 8
+  num_players: 2
+  game_length: 256
+  eval_num_episodes: 32
+
+ppo:
+  rollout_length: 256
+  per_agent_num_envs: 512
+  lr: 0.0003
+  # lr_schedule: one of 'constant' (hold lr fixed), 'linear' (decay linearly to 0
+  # over training), or 'warmup_cosine' (linearly warm up, then cosine-decay to 0).
+  lr_schedule: linear
+  # lr_warmup_ratio: fraction of total steps used for linear warmup. Only used
+  # when lr_schedule='warmup_cosine'; ignored for 'constant' and 'linear'.
+  lr_warmup_ratio: 0.0
+  grad_clip_norm: 0.5
+  ppo_epochs: 4
+
+  # minibatches per epoch = rollout_length * (learner batch) / batch_size
+  batch_size: 65536
+  minibatch_seq_len: 256
+  gamma: 0.99
+  gae_lam: 0.95
+  pi_loss_coef: 1.0
+  val_loss_coef: 1.0
+  entropy_coef: 0.005
+  ratio_clip: 0.2
+  value_clip: 10

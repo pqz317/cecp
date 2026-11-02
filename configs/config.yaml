@@ -1,0 +1,30 @@
+# Shared defaults for train_cec.py (cec.yaml) and train_cecp.py (cecp.yaml).
+# `env=overcooked` also switches the training defaults (general/ppo) to training_defaults/overcooked.yaml.
+defaults:
+  - architecture: cec
+  - env: coop_foraging
+  - training_defaults@_global_: ${env}
+  - _self_
+
+predictive:
+  # CECP's auxiliary next-state prediction objective (paper Eq. 6-7); pred_loss_coef is lambda.
+  use_predictive_objective: false
+  pred_loss_coef: 100
+
+logging:
+  runs_dir: runs        # runs are written to <runs_dir>/<general.run_name>/
+  wandb: false          # also log to Weights & Biases (pip install cecp[wandb])
+  wandb_entity: null
+  wandb_project: null
+  wandb_group: null
+  wandb_job_type: null
+
+sharding:
+  enable_multi_gpu_training: false
+
+hydra:
+  output_subdir: null
+  job:
+    chdir: false
+  run:
+    dir: .

@@ -1,0 +1,18 @@
+# train_cecp.py: `general.num_agents` cooperators trained against a frozen partner pool.
+defaults:
+  - config
+  - _self_
+  - experiment: null
+  - smoke: null
+
+ppo:
+  batch_size: 16384
+  per_agent_num_envs: 4096
+
+partners:
+  runs: []                       # CEC run directories, e.g. [runs/cf_cec]
+  num_checkpoints_per_agent: 3   # evenly spaced training checkpoints per partner agent (early ... late)
+  include_best: true             # plus each partner agent's 'best' checkpoint
+  target_steps: []               # if non-empty: the checkpoints nearest these steps instead
+  heldout_ratio: 0.2             # fraction of partner agents held out for evaluation
+  heldout_seed: 0

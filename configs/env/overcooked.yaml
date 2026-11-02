@@ -1,0 +1,59 @@
+name: overcooked
+
+# Layout name from cecp.envs.overcooked.overcooked_layouts.
+# Role depends on train_layout_mode (see below).
+layout: cramped_room
+
+# --- Training layout mode ---
+# Controls which layouts are used during training and evaluation.
+#
+# random (default):
+#   Each reset draws a new layout from five 9x9 proc-gen generators.
+#   `layout` is ignored during training. Eval uses a heldout pool of
+#   `heldout_layout_num_samples` proc-gen samples; the handcrafted *_9 layouts
+#   are excluded from the pool (evaluated separately) but training still avoids
+#   them. Set eval_on_reserved_layouts: true.
+#
+# fixed:
+#   Every reset (train and eval) uses the exact layout named by `layout`
+#   (e.g. cramped_room_9). No heldout pool is built.
+#   Set eval_on_reserved_layouts: false, heldout_layout_num_samples: 0.
+#
+# random_family:
+#   Like random, but restricted to one proc-gen family: every reset draws a
+#   fresh layout from the generator named by `layout` (e.g. asymm_advantages →
+#   make_asymm_advantages_9x9). Eval uses a heldout pool of
+#   `heldout_layout_num_samples` samples from that same generator.
+#   Set eval_on_reserved_layouts: true.
+#   Supported layout names: cramped_room, coord_ring, counter_circuit,
+#   forced_coord, asymm_advantages.
+#
+# fixed_procgen:
+#   One layout is sampled once at init from the proc-gen generator for
+#   `layout` (e.g. cramped_room → make_cramped_room_9x9) using
+#   `train_procgen_seed`. That layout is used for all training resets.
+#   Eval uses a heldout pool containing only `layout`_9 (e.g. cramped_room_9).
+#   Set eval_on_reserved_layouts: true, heldout_layout_num_samples: 0.
+#   Supported layout names: cramped_room, coord_ring, counter_circuit,
+#   forced_coord, asymm_advantages.
+train_layout_mode: random
+
+# Seed for sampling the single training layout in fixed_procgen mode.
+# Different seeds yield different layouts. Ignored in other modes.
+train_procgen_seed: 0
+
+# Heldout eval pool settings (used in random and fixed_procgen modes).
+heldout_layout_seed: 42
+heldout_layout_num_samples: 500
+
+# Whether to evaluate on the reserved heldout pool (true) or the default
+# training reset path (false). Should match train_layout_mode:
+#   random        → true
+#   random_family → true
+#   fixed         → false
+#   fixed_procgen → true
+eval_on_reserved_layouts: true
+
+pad_obs_shape_to: null
+train_shaped_reward_factor: 1
+reward_shaping_steps: 1500000000

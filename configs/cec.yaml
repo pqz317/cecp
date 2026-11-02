@@ -1,0 +1,6 @@
+# train_cec.py: a population of `general.num_agents` self-play agents.
+defaults:
+  - config
+  - _self_
+  - experiment: null
+  - smoke: null

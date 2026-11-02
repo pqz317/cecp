@@ -1,0 +1,14 @@
+encoder_conv_sizes: [64, 32]
+encoder_conv_kernel_sizes: [2, 2]
+encoder_conv_strides: [1, 1]
+encoder_fc_sizes: [512, 512]
+rnn_type: lstm
+rnn_layers: 1
+rnn_hidden_size: 256
+readout_size: 256
+actor_head_sizes: [256, 192, 128, 64]
+critic_head_sizes: [512, 256, 192, 128]
+encoder_kernel_init_scale: 1.4142135623730951
+head_kernel_init_scale: 2.0
+actor_output_kernel_init_scale: 0.01
+critic_output_kernel_init_scale: 1.0

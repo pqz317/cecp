@@ -1,0 +1,23 @@
+# @package _global_
+# Coop Foraging CECP cooperators (paper run cf_cecp_pred / W&B emd5uhws, minus its missing readout layer),
+# trained against the cf_cec population.
+general:
+  run_name: cf_cecp
+  num_agents: 10
+  per_agent_env_steps: 3000000000
+ppo:
+  per_agent_num_envs: 4096
+  batch_size: 4096
+  ppo_epochs: 1
+architecture:
+  actor_head_sizes: [256, 192, 128]
+  critic_head_sizes: [512, 256, 192]
+predictive:
+  use_predictive_objective: true
+  pred_loss_coef: 20
+partners:
+  runs: ['${logging.runs_dir}/cf_cec']
+  num_checkpoints_per_agent: 5
+  heldout_ratio: 0.2
+sharding:
+  enable_multi_gpu_training: true

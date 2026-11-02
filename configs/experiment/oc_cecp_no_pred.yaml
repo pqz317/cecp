@@ -1,0 +1,16 @@
+# @package _global_
+# Ablation: oc_cecp without the next-state prediction objective (paper Fig. 8; W&B jpk1h0x4).
+defaults:
+  - override /env: overcooked
+general:
+  run_name: oc_cecp_no_pred
+ppo:
+  per_agent_num_envs: 4096
+  batch_size: 16384
+predictive:
+  use_predictive_objective: false
+partners:
+  runs: ['${logging.runs_dir}/oc_cec']
+  num_checkpoints_per_agent: 3
+sharding:
+  enable_multi_gpu_training: true

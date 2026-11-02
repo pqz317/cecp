@@ -1,0 +1,20 @@
+# @package _global_
+# Tiny Overcooked settings for the smoke test (GPU recommended: Overcooked is compile-bound on CPU).
+general:
+  num_agents: 2
+  per_agent_env_steps: 1280        # 5 cycles x rollout_length 32 x 8 envs
+  game_length: 64
+  eval_num_episodes: 4
+env:
+  heldout_layout_num_samples: 4
+ppo:
+  per_agent_num_envs: 8
+  rollout_length: 32
+  minibatch_seq_len: 32
+  batch_size: 256
+  ppo_epochs: 1
+partners:
+  num_checkpoints_per_agent: 3
+  heldout_ratio: 0.5
+sharding:
+  enable_multi_gpu_training: false

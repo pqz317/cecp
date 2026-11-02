@@ -1,0 +1,17 @@
+# @package _global_
+# Tiny Coop Foraging settings for the smoke test: 2 agents, 5 training cycles (one eval + checkpoint each).
+general:
+  num_agents: 2
+  per_agent_env_steps: 2400        # 5 cycles x rollout_length 60 x 8 envs
+  eval_num_episodes: 4
+ppo:
+  per_agent_num_envs: 8
+  rollout_length: 60
+  minibatch_seq_len: 60
+  batch_size: 480
+  ppo_epochs: 1
+partners:
+  num_checkpoints_per_agent: 3
+  heldout_ratio: 0.5
+sharding:
+  enable_multi_gpu_training: false

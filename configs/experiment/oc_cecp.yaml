@@ -1,0 +1,17 @@
+# @package _global_
+# Overcooked CECP cooperators (paper run oc_cecp_pred_1000 / W&B hksyr2i5), trained against oc_cec.
+defaults:
+  - override /env: overcooked
+general:
+  run_name: oc_cecp
+ppo:
+  per_agent_num_envs: 4096
+  batch_size: 16384
+predictive:
+  use_predictive_objective: true
+  pred_loss_coef: 1000
+partners:
+  runs: ['${logging.runs_dir}/oc_cec']
+  num_checkpoints_per_agent: 3
+sharding:
+  enable_multi_gpu_training: true

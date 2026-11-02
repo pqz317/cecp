@@ -1,0 +1,15 @@
+# @package _global_
+# Coop Foraging CEC partner population (paper run cf_cec / W&B 2zljwla8, minus its missing readout layer).
+general:
+  run_name: cf_cec
+  num_agents: 10
+  per_agent_env_steps: 3000000000
+ppo:
+  per_agent_num_envs: 4096
+  batch_size: 8192
+  ppo_epochs: 1
+architecture:
+  actor_head_sizes: [256, 192, 128]
+  critic_head_sizes: [512, 256, 192]
+sharding:
+  enable_multi_gpu_training: true

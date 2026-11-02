@@ -1,0 +1,11 @@
+# @package _global_
+# Overcooked CEC partner population (paper run oc_cec / W&B 2ij8xm0z, minus its missing readout layer).
+defaults:
+  - override /env: overcooked
+general:
+  run_name: oc_cec
+ppo:
+  per_agent_num_envs: 512
+  batch_size: 65536
+sharding:
+  enable_multi_gpu_training: true

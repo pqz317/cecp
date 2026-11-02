@@ -1,0 +1,13 @@
+name: coop_foraging
+reward_shaping_steps: 10000000000
+heldout_goal_ratio: 0.2
+heldout_goal_seed: 42
+eval_on_reserved_goals: true
+obstacle_density: 0
+
+# Layout mode: 'random' re-samples goal/obstacle positions every episode;
+# 'fixed_procgen' samples goal/obstacle positions once at init using train_procgen_seed and never changes them.
+train_layout_mode: random
+
+# RNG seed used to sample the fixed layout in fixed_procgen mode. Different seeds yield different layouts.
+train_procgen_seed: 0
