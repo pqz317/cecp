@@ -1,0 +1,31 @@
+# scripts/eval/evaluate_skill_decoding.py: decode the partner's training stage from the ego's latents
+# (paper Fig 1c, 10a, 10b). Defaults are the paper settings.
+#   CECP curve: run=runs/oc_cecp   (partner pool and stages from its partners.yaml)
+#   CEC curve:  run=runs/oc_cec latent_key=rnn_hidden partners.num_checkpoints_per_agent=3   (its own population)
+#     (the paper's CEC model had no readout layer, hence rnn_hidden; cecp models always have one)
+run: ''
+agent_ids: [0]
+latent_key: readout           # readout | rnn_hidden
+partners:
+  runs: []                    # CEC run dirs; empty -> the ego run's partners.yaml, else the ego run itself
+  num_checkpoints_per_agent: null   # null -> the ego run's partners.yaml
+  include_best: true          # 'best' partners are played (shifting later RNG streams) but not labelled
+eval_name: skill_decoding
+overwrite: false
+num_episodes_per_partner: 20
+episode_length: 100
+seed: null                    # null -> the run's general.seed
+eval_seed_offset: 300000000
+env_overrides: {}
+ego_role: 0
+num_pcs: 10
+decode_ridge: 1.0e-4
+pca_traj_subsample_n: 30
+save_plots: true
+
+hydra:
+  output_subdir: null
+  job:
+    chdir: false
+  run:
+    dir: .

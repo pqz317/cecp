@@ -8,7 +8,9 @@ MODULES = [
     'cecp.models.action_distribution', 'cecp.models.feature_extractors', 'cecp.models.nn_configs',
     'cecp.models.next_state_prediction', 'cecp.models.nn_blocks',
     'cecp.policy.actor_critic', 'cecp.policy.agent_wrapper', 'cecp.policy.build',
-    'cecp.trainers.ppo', 'cecp.controller.base', 'cecp.controller.ippo',
+    'cecp.trainers.ppo', 'cecp.controller.base', 'cecp.controller.ippo', 'cecp.training',
+    'cecp.eval.common', 'cecp.eval.display', 'cecp.eval.rollouts', 'cecp.eval.plotting', 'cecp.eval.overcooked',
+    'cecp.eval.diversity',
 ]
 
 

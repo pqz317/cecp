@@ -1,0 +1,25 @@
+# scripts/eval/evaluate_action_prediction.py: partner-movement prediction accuracy of a CECP cooperator
+# (paper Fig 9a, AI side). Defaults are the paper settings: cooperator 1 against each CEC partner
+# agent's 'best' checkpoint.
+#   python scripts/eval/evaluate_action_prediction.py run=runs/oc_cecp
+run: ''
+agent_id: 1
+partners:
+  runs: []                    # CEC run dirs; empty -> the ego run's partners.yaml
+  num_checkpoints_per_agent: 0      # step checkpoints per partner agent (0: 'best' only)
+  include_best: true
+eval_name: action_prediction
+overwrite: false
+num_episodes_per_partner: 50
+episode_length: 256
+seed: null                    # null -> the run's general.seed
+eval_seed_offset: 500000000
+env_overrides: {}
+ego_role: 0
+
+hydra:
+  output_subdir: null
+  job:
+    chdir: false
+  run:
+    dir: .

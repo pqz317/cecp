@@ -1,0 +1,17 @@
+# scripts/eval/visualize_partner_stage_mi_states.py: the states where the ego's action depends most on
+# the partner's stage (paper Fig 11, 19). Defaults are the paper settings (run=runs/oc_cecp).
+run: ''
+mi_eval_name: partner_stage_mi   # the evaluate_partner_stage_mi.py output to read
+layout: forced_coord_9
+agent_id: 3
+top_k: 10
+min_total_samples: 0
+eval_name: null               # null -> partner_stage_mi_states/<layout>/agent_<agent_id>
+overwrite: false
+
+hydra:
+  output_subdir: null
+  job:
+    chdir: false
+  run:
+    dir: .

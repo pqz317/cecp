@@ -1,0 +1,26 @@
+# scripts/eval/evaluate_cell_action_distributions.py: per-member action distributions at one cell
+# (paper Fig 5, 13). Defaults are the paper settings.
+run: ''                       # the population, e.g. runs/oc_cec
+eval_name: cell_action_distributions
+overwrite: false
+layout: coord_ring_9
+cells: [[3, 1]]               # [[row, col], ...]
+inventory: onion              # empty | onion | plate | dish
+max_agents: 8
+episodes_per_source: 32
+episode_length: null          # null -> general.game_length (256 for the Overcooked runs)
+replay_batch_size: 16         # must divide 2 * episodes_per_source
+seed: null
+eval_seed_offset: 400000000
+min_states_per_orientation: 20
+display_orientation: null     # facing direction drawn in cell_context.png; null -> per-layout default
+env_overrides:
+  heldout_layout_num_samples: 0
+  eval_on_reserved_layouts: false
+
+hydra:
+  output_subdir: null
+  job:
+    chdir: false
+  run:
+    dir: .

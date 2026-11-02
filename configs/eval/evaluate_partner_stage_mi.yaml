@@ -1,0 +1,33 @@
+# scripts/eval/evaluate_partner_stage_mi.py: I(a; z | s) between the ego's action and its partner's
+# training stage (paper Fig 18). Defaults are the paper settings.
+runs: []                      # ego runs, e.g. [runs/oc_cec,runs/oc_cecp]
+partners:
+  runs: []                    # empty -> a CECP ego's partners.yaml runs, or a CEC ego run itself
+  num_checkpoints_per_agent: 3    # the three evenly spaced stages (early / mid / late)
+  include_best: false
+eval_name: partner_stage_mi
+overwrite: false
+layouts: [asymm_advantages_9, coord_ring_9, counter_circuit_9, cramped_room_9, forced_coord_9]
+max_ego_agents: 0             # 0 = every agent
+episodes_per_partner: 1000
+episode_length: 60            # rollout window; the env clock keeps the training game length
+min_timestep: 10
+min_samples_per_cell: 10
+n_permutations: 1000
+permutation_chunk: 25
+analysis_seed: 0
+seed: null                    # null -> each ego run's general.seed
+eval_seed_offset: 700000000
+save_raw_rows: true
+env_overrides:                # rollouts start from the original layouts' fixed states
+  layout: coord_ring_9
+  train_layout_mode: fixed
+  heldout_layout_num_samples: 0
+  eval_on_reserved_layouts: false
+
+hydra:
+  output_subdir: null
+  job:
+    chdir: false
+  run:
+    dir: .

@@ -1,0 +1,26 @@
+# scripts/eval/visualize_predictions.py: next-state prediction example frames (paper Fig 17).
+# Defaults are the paper settings: cooperator 0 with CEC partner agent 1 on Counter Circuit.
+run: ''
+agent_id: 0
+partner_run: ''               # '' -> the first partner run in the ego's partners.yaml
+partner_agent_id: 1
+partner_ckpt: best
+eval_name: prediction_frames
+overwrite: false
+num_steps: 50
+seed: null                    # null -> the run's general.seed
+eval_seed_offset: 300000000
+env_overrides:                # one fixed original layout instead of the held-out pool
+  layout: counter_circuit_9
+  train_layout_mode: fixed
+  heldout_layout_num_samples: 0
+  eval_on_reserved_layouts: false
+agent_view_size: 5
+figure_dpi: 160
+
+hydra:
+  output_subdir: null
+  job:
+    chdir: false
+  run:
+    dir: .

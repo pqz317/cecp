@@ -1,6 +1,24 @@
+import os
+
+# The GPU smoke tests run training scripts as subprocesses while this process also holds JAX arrays;
+# without this, the first JAX process would preallocate most of the GPU memory and starve the others.
+os.environ.setdefault('XLA_PYTHON_CLIENT_PREALLOCATE', 'false')
+
 import pytest
 
 from cecp.config import ArchitectureConfig, CoopForagingEnvConfig, OvercookedEnvConfig
+
+
+@pytest.fixture(scope='session')
+def cf_runs_dir(tmp_path_factory):
+    """Tiny Coop Foraging CEC population and CECP cooperators (configs/smoke/cf.yaml), trained once per
+    test session through the real scripts and shared by the training and eval smoke tests."""
+    from smoke_utils import run_script
+
+    runs_dir = tmp_path_factory.mktemp('cf_runs')
+    run_script('train_cec.py', 'experiment=cf_cec', 'smoke=cf', f'logging.runs_dir={runs_dir}')
+    run_script('train_cecp.py', 'experiment=cf_cecp', 'smoke=cf', f'logging.runs_dir={runs_dir}')
+    return runs_dir
 
 
 @pytest.fixture

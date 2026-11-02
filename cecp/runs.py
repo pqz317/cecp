@@ -255,11 +255,12 @@ class MetricsLogger:
 
 # -- rebuilding a policy -------------------------------------------------------------------------
 
-def load_policy(run: RunDir | str | os.PathLike, agent_id: int, ckpt: Checkpoint = 'best') -> tuple[Any, PyTreeNode]:
-    """Rebuild agent `agent_id`'s model from the run's config.yaml and load checkpoint `ckpt`.
+def build_model_fn(run: RunDir | str | os.PathLike) -> tuple[Any, PyTreeNode]:
+    """Rebuild the run's model from its config.yaml, without loading a checkpoint.
 
     Uses the config sections `env`, `general.num_players`, `general.game_length`, `architecture` and
-    `predictive`. Returns (model_fn, model_state), as consumed by `ActorWrapperAgent` and friends.
+    `predictive`. Returns (model_fn, template): all agents of a run share the model_fn, and `template`
+    is a freshly initialised model state to pass to `RunDir.load_params`.
     """
     from .config import ArchitectureConfig, PredictiveConfig, env_config_from_mapping, from_mapping
     from .envs.make import make_env
@@ -279,5 +280,16 @@ def load_policy(run: RunDir | str | os.PathLike, agent_id: int, ckpt: Checkpoint
         env.get_observation_space()[0],
         env.get_action_space()[0],
     )
-    template = model_fn.init_model_state(jax.random.key(0))
+    return model_fn, model_fn.init_model_state(jax.random.key(0))
+
+
+def load_policy(run: RunDir | str | os.PathLike, agent_id: int, ckpt: Checkpoint = 'best') -> tuple[Any, PyTreeNode]:
+    """Rebuild agent `agent_id`'s model from the run's config.yaml and load checkpoint `ckpt`.
+
+    Returns (model_fn, model_state), as consumed by `ActorWrapperAgent` and friends. To load many
+    checkpoints of one run, call `build_model_fn` once and then `RunDir.load_params` per checkpoint.
+    """
+    if not isinstance(run, RunDir):
+        run = RunDir.open(run)
+    model_fn, template = build_model_fn(run)
     return model_fn, run.load_params(agent_id, ckpt, template)

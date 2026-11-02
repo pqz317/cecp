@@ -1,0 +1,25 @@
+# scripts/eval/evaluate_population_diversity.py: within-population action disagreement (paper Table 2).
+# Defaults are the paper settings (pooled state buffer, 8 episodes per member, 8 members).
+runs: []                      # populations to score, e.g. [runs/oc_cec]; with shared_state_buffer their
+                              # self-play states are pooled and every population is scored on all of them
+eval_name: population_diversity
+overwrite: false
+ckpt: best
+max_agents: 8
+layouts: [asymm_advantages_9, coord_ring_9, counter_circuit_9, cramped_room_9, forced_coord_9]
+shared_state_buffer: true
+episodes_per_source: 8
+episode_length: null          # null -> general.game_length (256 for the Overcooked runs)
+replay_batch_size: 16         # must divide 2 * episodes_per_source
+seed: null                    # null -> the first run's general.seed
+eval_seed_offset: 400000000
+env_overrides:                # rollouts start from the original layouts; the held-out pool is never used
+  heldout_layout_num_samples: 0
+  eval_on_reserved_layouts: false
+
+hydra:
+  output_subdir: null
+  job:
+    chdir: false
+  run:
+    dir: .
