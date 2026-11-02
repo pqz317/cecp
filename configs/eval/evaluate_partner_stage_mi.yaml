@@ -1,5 +1,9 @@
 # scripts/eval/evaluate_partner_stage_mi.py: I(a; z | s) between the ego's action and its partner's
 # training stage (paper Fig 18). Defaults are the paper settings.
+defaults:
+  - _self_
+  - override hydra/job_logging: none   # no <script>.log in the working directory
+
 runs: []                      # ego runs, e.g. [runs/oc_cec,runs/oc_cecp]
 partners:
   runs: []                    # empty -> a CECP ego's partners.yaml runs, or a CEC ego run itself

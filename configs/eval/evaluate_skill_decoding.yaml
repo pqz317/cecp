@@ -3,6 +3,10 @@
 #   CECP curve: run=runs/oc_cecp   (partner pool and stages from its partners.yaml)
 #   CEC curve:  run=runs/oc_cec latent_key=rnn_hidden partners.num_checkpoints_per_agent=3   (its own population)
 #     (the paper's CEC model had no readout layer, hence rnn_hidden; cecp models always have one)
+defaults:
+  - _self_
+  - override hydra/job_logging: none   # no <script>.log in the working directory
+
 run: ''
 agent_ids: [0]
 latent_key: readout           # readout | rnn_hidden

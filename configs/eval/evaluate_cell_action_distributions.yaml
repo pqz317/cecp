@@ -1,5 +1,9 @@
 # scripts/eval/evaluate_cell_action_distributions.py: per-member action distributions at one cell
 # (paper Fig 5, 13). Defaults are the paper settings.
+defaults:
+  - _self_
+  - override hydra/job_logging: none   # no <script>.log in the working directory
+
 run: ''                       # the population, e.g. runs/oc_cec
 eval_name: cell_action_distributions
 overwrite: false

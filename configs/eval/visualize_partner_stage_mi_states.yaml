@@ -1,5 +1,9 @@
 # scripts/eval/visualize_partner_stage_mi_states.py: the states where the ego's action depends most on
 # the partner's stage (paper Fig 11, 19). Defaults are the paper settings (run=runs/oc_cecp).
+defaults:
+  - _self_
+  - override hydra/job_logging: none   # no <script>.log in the working directory
+
 run: ''
 mi_eval_name: partner_stage_mi   # the evaluate_partner_stage_mi.py output to read
 layout: forced_coord_9

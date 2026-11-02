@@ -5,10 +5,15 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "cecp"
 version = "0.1.0"
-description = "Cross-Environment Co-Play (CECP): unifying partner and environment diversity for human-AI coordination"
+description = "Cross-Environment Co-Play (CECP): Unifying Partner and Environment Diversity to Improve Human-AI Coordination"
 readme = "README.md"
 license = {file = "LICENSE"}
-authors = [{name = "Patrick Q. Zhang", email = "pqz317@uw.edu"}]
+authors = [
+    {name = "Patrick Q. Zhang", email = "pqz317@uw.edu"},
+    {name = "Yancheng Liang"},
+    {name = "Adrienne Fairhall"},
+    {name = "Natasha Jaques"},
+]
 requires-python = ">=3.10"
 # Pinned to the stack the paper's models were trained with (JAX 0.4.17/0.4.18-era, Flax 0.7.4).
 # Install a CUDA build of jax separately if needed, e.g. `pip install "jax[cuda12_pip]==0.4.18" -f

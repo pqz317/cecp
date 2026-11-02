@@ -1,5 +1,9 @@
 # scripts/eval/evaluate_cross_play.py: cross-play between all agents of each run (paper Fig 6a/15;
 # Fig 12 data for Coop Foraging). The environment comes from each run's config.yaml.
+defaults:
+  - _self_
+  - override hydra/job_logging: none   # no <script>.log in the working directory
+
 runs: []                      # run dirs, e.g. [runs/oc_cec,runs/oc_cecp]; all must share one env
 eval_name: cross_play         # outputs go to <run>/eval/<eval_name>/
 overwrite: false

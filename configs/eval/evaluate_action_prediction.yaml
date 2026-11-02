@@ -2,6 +2,10 @@
 # (paper Fig 9a, AI side). Defaults are the paper settings: cooperator 1 against each CEC partner
 # agent's 'best' checkpoint.
 #   python scripts/eval/evaluate_action_prediction.py run=runs/oc_cecp
+defaults:
+  - _self_
+  - override hydra/job_logging: none   # no <script>.log in the working directory
+
 run: ''
 agent_id: 1
 partners:

@@ -5,6 +5,7 @@ defaults:
   - env: coop_foraging
   - training_defaults@_global_: ${env}
   - _self_
+  - override hydra/job_logging: none   # no <script>.log in the working directory
 
 predictive:
   # CECP's auxiliary next-state prediction objective (paper Eq. 6-7); pred_loss_coef is lambda.

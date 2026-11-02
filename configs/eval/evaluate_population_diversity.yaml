@@ -1,5 +1,9 @@
 # scripts/eval/evaluate_population_diversity.py: within-population action disagreement (paper Table 2).
 # Defaults are the paper settings (pooled state buffer, 8 episodes per member, 8 members).
+defaults:
+  - _self_
+  - override hydra/job_logging: none   # no <script>.log in the working directory
+
 runs: []                      # populations to score, e.g. [runs/oc_cec]; with shared_state_buffer their
                               # self-play states are pooled and every population is scored on all of them
 eval_name: population_diversity

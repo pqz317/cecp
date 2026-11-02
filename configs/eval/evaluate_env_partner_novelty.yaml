@@ -1,6 +1,10 @@
 # scripts/eval/evaluate_env_partner_novelty.py: familiar/novel environments x familiar/novel partners
 # (paper Fig 4, Coop Foraging). CEC runs are scored by self-play vs cross-play within the population;
 # CECP runs by their training vs held-out partners (from partners.yaml).
+defaults:
+  - _self_
+  - override hydra/job_logging: none   # no <script>.log in the working directory
+
 runs: []                      # run dirs, e.g. [runs/cf_cec,runs/cf_cecp]
 eval_name: env_partner_novelty
 overwrite: false
